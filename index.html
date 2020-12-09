@@ -6,21 +6,50 @@
     <title>Draw Figures</title>
     <script src="main.js" type="text/javascript"></script>
     <script src="handler.js" type="text/javascript"></script>
-    <script src="models/line.js" type="text/javascript"></script>
+    <script src="model.js" type="text/javascript"></script>
     <style type="text/css">
         canvas {
             border: 1px solid black;
+        }
+
+        [data-tooltip] {
+            position: relative;
+        }
+
+        [data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            width: 300px;
+            left: 0;
+            top: 0;
+            background: #3989c9;
+            color: #fff;
+            padding: 0.5em;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.1s;
+        }
+
+        [data-tooltip]:hover::after {
+            opacity: 1;
+            top: 2em;
         }
     </style>
 </head>
 
 <body>
-    <canvas id="my-canvas" width="800" height="600"></canvas>
+    <canvas id="my-canvas" width="800" height="600" data-tooltip="x: y: "></canvas>
+    <span id="coords"></span>
     <form>
         <p><b>Текстовое описание фигур:</b></p>
-        <p><textarea style="width: 800px;" name="description" id="text-area"></textarea></p>
-        <p><button type="button" id="all-draw-btn">Нарисовать</button></p>
+        <p><textarea style="width: 800px; height: 120px" name="description" id="text-area"></textarea></p>
+        <p>
+            <button type="button" id="all-draw-btn">Нарисовать</button>
+            <button type="button" id="all-clear-btn">Очистить</button>
+        </p>
     </form>
+    <div id="error"></div>
 </body>
 
 </html>
