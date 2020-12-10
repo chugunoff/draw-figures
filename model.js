@@ -9,37 +9,87 @@ class Canvas {
         this.ctx.clearRect(0, 0, this.width, this.height);
     }
 
-    drawLine(x1, y1, x2, y2) {
+    setStyle(strokeStyle = 'black', fillStyle = 'rgba(255, 255, 255, 0)', lineWidth = 1, lineType = 'solid') {
+        this.ctx.strokeStyle = strokeStyle;
+        this.ctx.fillStyle = fillStyle;
+        this.ctx.lineWidth = lineWidth;
+        switch (lineType) {
+            case 'solid':
+                this.ctx.setLineDash([]);
+                break;
+            case 'dotted':
+                this.ctx.setLineDash([1 * lineWidth, 1 * lineWidth]);
+                break;
+            case 'dashed':
+                this.ctx.setLineDash([5 * lineWidth, 3 * lineWidth]);
+                break;
+            default:
+                this.ctx.setLineDash([]);
+                break;
+        }
+    }
+
+    drawLine(x1, y1, x2, y2, color, lineWidth, lineType) {
+        this.setStyle(color, undefined, lineWidth, lineType);
         this.ctx.beginPath();
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);
         this.ctx.stroke();
     }
 
-    drawRect(x, y, width, height) {
+    drawRect(x, y, width, height, color, bgColor, lineWidth, lineType) {
+        this.setStyle(color, bgColor, lineWidth, lineType);
+
+        if (bgColor != undefined) {
+            this.ctx.fillRect(x, y, width, height);
+        }
         this.ctx.strokeRect(x, y, width, height);
     }
 
-    drawTri(x1, y1, x2, y2, x3, y3) {
-        // Stroked triangle
+    drawTri(x1, y1, x2, y2, x3, y3, color, bgColor, lineWidth, lineType) {
+        this.setStyle(color, bgColor, lineWidth, lineType);
+        
         this.ctx.beginPath();
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);
         this.ctx.lineTo(x3, y3);
         this.ctx.closePath();
+        if (bgColor != undefined) {
+            this.ctx.fill();
+        }
         this.ctx.stroke();
     }
 
-    drawCircle(x, y, radius) {
+    drawCircle(x, y, radius, color, bgColor, lineWidth, lineType) {
         let startAngle = 0;
-        let endAngle = (Math.PI/180)*360;
+        let endAngle = (Math.PI / 180) * 360;
         let anticlockwise = false;
+        
+        this.setStyle(color, bgColor, lineWidth, lineType);
+
         this.ctx.beginPath();
         this.ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+        this.ctx.closePath();
+        if (bgColor != undefined) {
+            this.ctx.fill();
+        }
         this.ctx.stroke();
     }
 
-    drawEllipse() {
+    drawEllipse(x, y, radiusX, radiusY, color, bgColor, lineWidth, lineType) {
+        let rotation = 0;
+        let startAngle = 0;
+        let endAngle = (Math.PI / 180) * 360;
+        let anticlockwise = false;
 
+        this.setStyle(color, bgColor, lineWidth, lineType);
+
+        this.ctx.beginPath();
+        this.ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+        this.ctx.closePath();
+        if (bgColor != undefined) {
+            this.ctx.fill();
+        }
+        this.ctx.stroke();
     }
 }
