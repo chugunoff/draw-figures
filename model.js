@@ -29,65 +29,56 @@ class Canvas {
         }
     }
 
-    drawLine(x1, y1, x2, y2, color, lineWidth, lineType) {
-        this.setStyle(color, undefined, lineWidth, lineType);
+    drawLine(x1, y1, x2, y2) {
         this.ctx.beginPath();
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);
         this.ctx.stroke();
     }
 
-    drawRect(x, y, width, height, color, bgColor, lineWidth, lineType) {
-        this.setStyle(color, bgColor, lineWidth, lineType);
-
-        if (bgColor != undefined) {
+    drawRect(x, y, width, height) {
+        if (this.ctx.fillStyle != undefined) {
             this.ctx.fillRect(x, y, width, height);
         }
         this.ctx.strokeRect(x, y, width, height);
     }
 
-    drawTri(x1, y1, x2, y2, x3, y3, color, bgColor, lineWidth, lineType) {
-        this.setStyle(color, bgColor, lineWidth, lineType);
-        
+    drawTri(x1, y1, x2, y2, x3, y3) {
         this.ctx.beginPath();
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);
         this.ctx.lineTo(x3, y3);
         this.ctx.closePath();
-        if (bgColor != undefined) {
+        if (this.ctx.fillStyle != undefined) {
             this.ctx.fill();
         }
         this.ctx.stroke();
     }
 
-    drawCircle(x, y, radius, color, bgColor, lineWidth, lineType) {
+    drawCircle(x, y, radius) {
         let startAngle = 0;
         let endAngle = (Math.PI / 180) * 360;
         let anticlockwise = false;
         
-        this.setStyle(color, bgColor, lineWidth, lineType);
-
         this.ctx.beginPath();
         this.ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
         this.ctx.closePath();
-        if (bgColor != undefined) {
+        if (this.ctx.fillStyle != undefined) {
             this.ctx.fill();
         }
         this.ctx.stroke();
     }
 
-    drawEllipse(x, y, radiusX, radiusY, color, bgColor, lineWidth, lineType) {
+    drawEllipse(x, y, radiusX, radiusY) {
         let rotation = 0;
         let startAngle = 0;
         let endAngle = (Math.PI / 180) * 360;
         let anticlockwise = false;
 
-        this.setStyle(color, bgColor, lineWidth, lineType);
-
         this.ctx.beginPath();
         this.ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
         this.ctx.closePath();
-        if (bgColor != undefined) {
+        if (this.ctx.fillStyle != undefined) {
             this.ctx.fill();
         }
         this.ctx.stroke();

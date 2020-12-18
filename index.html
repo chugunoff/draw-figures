@@ -1,46 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
     <title>Draw Figures</title>
+
+    <link href="style.css" rel="stylesheet">
+
     <script src="controller.js" type="text/javascript"></script>
     <script src="model.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <h1>Draw Figures</h1>
-    </header>
+<header>
+    <h1>Draw Figures</h1>
+</header>
 
-    <main>
-        <div class="left-column">
-            <h2>Фигуры:</h2>
-            <div id="figure-name-list"></div>
-            <h2>Опции:</h2>
-            <p>-&lt;option_name&gt; &lt;option_value&gt;</p>
-            <div id="option-list"></div>
-        </div>
+<main>
+    <div class="left-column">
+        <h2>Фигуры:</h2>
+        <div id="figure-name-list"></div>
+        <h2>Опции:</h2>
+        <p>-&lt;option_name&gt; &lt;option_value&gt;</p>
+        <div id="option-list"></div>
+    </div>
 
-        <div class="container">
-            <canvas id="my-canvas"></canvas>
-            <div id="coords"></div>
-            <form>
-                <p><b>Текстовое описание фигур:</b></p>
-                <textarea name="description" id="text-area"></textarea>
-                <p>
-                    <button type="button" id="all-draw-btn">Нарисовать</button>
-                    <button type="button" id="all-clear-btn">Очистить</button>
-                </p>
-            </form>
-            <div id="error"></div>
-        </div>
+    <div class="container">
+        <canvas id="my-canvas"></canvas>
+        <div id="coords"></div>
+        <form>
+            <label for="text-area">Текстовое описание фигур:</label>
+            <textarea id="text-area" name="description"></textarea>
+            <p>
+                <button id="all-draw-btn" type="button">Нарисовать</button>
+                <button id="all-clear-btn" type="button">Очистить</button>
+            </p>
+        </form>
+        <div id="error"></div>
+    </div>
 
-        <div class="right-column"></div>
-    </main>
+    <div class="right-column"></div>
+</main>
 
-    <footer></footer>
+<footer></footer>
 </body>
 
 </html>
